@@ -4,9 +4,7 @@ import { useSnapshot } from 'valtio'
 import { state } from '../store/store'
 import { lazy, Suspense } from 'react';
 
-const Customizer = lazy(() => { import('./Customizer') });
-
-
+const Customizer = lazy(() => import('./Customizer') );
 
 export function Overlay() {
     const snap = useSnapshot(state)
