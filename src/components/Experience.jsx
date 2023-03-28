@@ -5,6 +5,7 @@ import { state } from '../store/store'
 
 const DogModel = lazy(() => import('../models/DogModel'))
 const DuckModel = lazy(() => import('../models/DuckModel'))
+const BearModel = lazy(() => import('../models/BearModel'))
 
 const Experience = () => {
     const snap = useSnapshot(state);
@@ -48,9 +49,11 @@ const Experience = () => {
                         { 
                             snap.model === 'duck' && <DuckModel { ...modelsProps } />
                         }
-
                         {
                             snap.model === 'dog' && <DogModel { ...modelsProps } />
+                        }
+                        {
+                            snap.model === 'bear' && <BearModel { ...modelsProps } />
                         }
                     </Suspense>
                 </Float>
