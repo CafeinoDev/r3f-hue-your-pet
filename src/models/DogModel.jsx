@@ -10,7 +10,7 @@ const DogModel = (props) => {
     const group = useRef()
     const snap = useSnapshot(state)
 
-    const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/dog/model.gltf');
+    const { nodes, materials } = useGLTF('./dog.gltf');
     
     useFrame((state, delta) => easing.dampC(materials['Beige.017'].color, snap.color, 0.25, delta))
 
@@ -31,4 +31,4 @@ const DogModel = (props) => {
 
 export default DogModel;
 
-useGLTF.preload('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/dog/model.gltf')
+useGLTF.preload('./dog.gltf')

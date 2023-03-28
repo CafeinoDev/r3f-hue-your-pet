@@ -1,9 +1,10 @@
-import { Environment, EnvironmentMap, Float, Instance, Instances, Lightformer, OrbitControls, PresentationControls, RandomizedLight } from "@react-three/drei";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
+import { Environment, EnvironmentMap, Float, Instance, Instances, PresentationControls } from "@react-three/drei";
 import { useSnapshot } from 'valtio'
-import DogModel from "../models/DogModel";
-import DuckModel from "../models/DuckModel";
 import { state } from '../store/store'
+
+const DogModel = lazy(() => import('../models/DogModel'))
+const DuckModel = lazy(() => import('../models/DuckModel'))
 
 const Experience = () => {
     const snap = useSnapshot(state);

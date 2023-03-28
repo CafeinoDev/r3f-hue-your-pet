@@ -10,7 +10,7 @@ const DuckModel = (props) => {
     const group = useRef()
     const snap = useSnapshot(state)
 
-    const { nodes, materials } = useGLTF('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/duck/model.gltf');
+    const { nodes, materials } = useGLTF('./duck.gltf');
     
     useFrame((state, delta) => easing.dampC(materials['White.026'].color, snap.color, 0.25, delta))
 
@@ -32,4 +32,4 @@ const DuckModel = (props) => {
 
 export default DuckModel;
 
-useGLTF.preload('https://vazxmixjsiawhamofees.supabase.co/storage/v1/object/public/models/duck/model.gltf')
+useGLTF.preload('./duck.gltf')
