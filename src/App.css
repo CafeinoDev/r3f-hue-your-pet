@@ -129,6 +129,7 @@ section {
   z-index: -100;
 }
 
+
 button {
   background-color: #dd5c18;
   border: none;
@@ -213,6 +214,18 @@ button:hover {
 .circle:hover {
   transform: scale(1.2);
   cursor: pointer;
+}
+
+.color-picker-popup{
+    position: fixed;
+    bottom: 10%;
+    display: flex;
+    align-items: center;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    pointer-events: all;
+    z-index: 100;
 }
 
 .models {
@@ -341,5 +354,9 @@ button:hover {
     right: 0;
     lefT: 0;
     justify-content: center;
+  }
+
+  .color-picker-popup{
+    bottom: 20%;
   }
 }

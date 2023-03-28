@@ -1,7 +1,9 @@
 import { motion, AnimatePresence } from 'framer-motion'
 import { AiFillCamera, AiOutlineArrowLeft, AiOutlineHighlight, AiOutlineShopping } from 'react-icons/ai'
+import { HuePicker, SketchPicker } from 'react-color';
 import { useSnapshot } from 'valtio'
 import { state } from '../store/store'
+import { memo, useEffect, useState } from 'react';
 
 export function Overlay() {
     const snap = useSnapshot(state)
@@ -14,11 +16,7 @@ export function Overlay() {
 
     return (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} className="overlay--wrapper">
-        {/* <motion.header initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
-            <motion.div animate={{ x: snap.intro ? 0 : 100, opacity: snap.intro ? 1 : 0 }} transition={transition}>
-            <AiOutlineShopping size="3em" />
-            </motion.div>
-        </motion.header> */}
+
         <AnimatePresence>
             {snap.intro ? (
             <motion.section key="main" {...config}>
@@ -64,12 +62,33 @@ export function Overlay() {
     )
 }
 
-function Customizer() {
+const Customizer = memo(() => {
     const snap = useSnapshot(state)
 
-    const handleColorChange = (e) => {
-        state.color = e.target.value;
+    const [showColorPicker, setShowColorPicker] = useState(false);
+    const [color, setColor] = useState('#EFBD4E');
+
+    const handleColorChange = (selectedColor) => {
+        setColor(selectedColor.hex);
+        state.color = selectedColor.hex;
     };
+
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+          if (!event.target.closest('.color-picker-popup-inner') && !event.target.closest('.circle.multicolor')) {
+            setShowColorPicker(false);
+          }
+        };
+    
+        if (showColorPicker) {
+          document.addEventListener('click', handleClickOutside);
+        }
+    
+        return () => {
+          document.removeEventListener('click', handleClickOutside);
+        };
+      }, [showColorPicker]);
 
     return (
     <div className="customizer">
@@ -78,15 +97,20 @@ function Customizer() {
             <div key={color} className={`circle`} style={{ background: color }} onClick={() => (state.color = color)}></div>
         ))}
         
-        <div className="circle multicolor">
-            <input
-                type="color"
-                className="color-input"
-                onChange={handleColorChange}
-            />
-        </div>
+        <div className="circle multicolor" onClick={() => setShowColorPicker(!showColorPicker)} />
+
 
         </div>
+        {showColorPicker && (
+            <div className="color-picker-popup">
+                <div className="color-picker-popup-inner" onClick={(e) => e.stopPropagation()}>
+                <HuePicker
+                    color={color}
+                    onChange={handleColorChange}
+                />
+                </div>
+            </div>
+        )}
         <button
         className="share"
         style={{ background: snap.color }}
@@ -112,6 +136,6 @@ function Customizer() {
         </div>
     </div>
     )
-}
+});
 
 export default Overlay;
