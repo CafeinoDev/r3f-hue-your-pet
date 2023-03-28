@@ -11,7 +11,7 @@ export function Overlay() {
         animate: { x: 0, opacity: 1, transition: { ...transition, delay: 0 } },
         exit: { x: -100, opacity: 0, transition: { ...transition, delay: 0 } }
     }
-    
+
     return (
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }} className="overlay--wrapper">
         {/* <motion.header initial={{ opacity: 0, y: -100 }} animate={{ opacity: 1, y: 0 }} transition={transition}>
@@ -66,12 +66,26 @@ export function Overlay() {
 
 function Customizer() {
     const snap = useSnapshot(state)
+
+    const handleColorChange = (e) => {
+        state.color = e.target.value;
+    };
+
     return (
     <div className="customizer">
         <div className="color-options">
         {snap.colors.map((color) => (
             <div key={color} className={`circle`} style={{ background: color }} onClick={() => (state.color = color)}></div>
         ))}
+        
+        <div className="circle multicolor">
+            <input
+                type="color"
+                className="color-input"
+                onChange={handleColorChange}
+            />
+        </div>
+
         </div>
         <button
         className="share"
