@@ -12,6 +12,9 @@ A web application built with React, ThreeJS, and React Three Fiber that allows u
 -   [React Icons](https://react-icons.github.io/react-icons/)
 -   [@react-three/drei](https://github.com/pmndrs/drei)
 
+### Credits
+Duck and dog models and more in [https://market.pmnd.rs/](https://market.pmnd.rs/)
+
 ### Author
 - [Andy Alvarado](https://andyalvarado.com)
 - [Cafeino Dev](https://cafeino.dev)
