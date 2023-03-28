@@ -1,4 +1,5 @@
 import { Environment, EnvironmentMap, Float, Instance, Instances, Lightformer, OrbitControls, PresentationControls, RandomizedLight } from "@react-three/drei";
+import { Suspense } from "react";
 import { useSnapshot } from 'valtio'
 import DogModel from "../models/DogModel";
 import DuckModel from "../models/DuckModel";
@@ -42,18 +43,21 @@ const Experience = () => {
                 <Float
                     rotationIntensity={ 0.5 }
                 >
-                    { 
-                        snap.model === 'duck' && <DuckModel { ...modelsProps } />
-                    }
+                    <Suspense>
+                        { 
+                            snap.model === 'duck' && <DuckModel { ...modelsProps } />
+                        }
 
-                    {
-                        snap.model === 'dog' && <DogModel { ...modelsProps } />
-                    }
+                        {
+                            snap.model === 'dog' && <DogModel { ...modelsProps } />
+                        }
+                    </Suspense>
                 </Float>
             </PresentationControls>
             
-            
-            <Grid />
+            <Suspense>
+                <Grid />
+            </Suspense>            
 
         </>
     )
