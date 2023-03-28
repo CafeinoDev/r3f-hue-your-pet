@@ -7,6 +7,12 @@ import { state } from '../store/store'
 const Experience = () => {
     const snap = useSnapshot(state);
     
+    const modelsProps = {
+        "scale": 2.2,
+        "position-y": -2,
+        "rotation": [ -.25,.2,0 ],
+        "position-x": -0.25
+    }
 
     return (
         <>
@@ -37,11 +43,11 @@ const Experience = () => {
                     rotationIntensity={ 0.5 }
                 >
                     { 
-                        snap.model === 'duck' && <DuckModel scale={ 2.3 } position-y={ -2 } />
+                        snap.model === 'duck' && <DuckModel { ...modelsProps } />
                     }
 
                     {
-                        snap.model === 'dog' && <DogModel scale={ 2.3 } position-y={ -2 } />
+                        snap.model === 'dog' && <DogModel { ...modelsProps } />
                     }
                 </Float>
             </PresentationControls>
